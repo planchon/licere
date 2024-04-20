@@ -1,0 +1,2 @@
+= Licere
+Tests on Zanzibar authorization model
