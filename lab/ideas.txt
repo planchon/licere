@@ -1,0 +1,11 @@
+entity User {}
+
+entity Folder {
+    relation owner: User
+    relation reader: User
+    relation parent: Folder
+    
+    read := owner | parent.read
+    edit := owner | reader | parent.edit
+}
+
