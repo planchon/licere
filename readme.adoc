@@ -1,2 +1,6 @@
 = Licere
+
 Tests on Zanzibar authorization model
+
+.What licere mean?
+NOTE: Its from the latin "licere" which mean to allow
