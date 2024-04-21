@@ -8,4 +8,3 @@ entity Folder {
     read := owner | parent.read
     edit := owner | reader | parent.edit
 }
-

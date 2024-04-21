@@ -5,10 +5,15 @@ folder_schema = SchemaGraph()
 user_entity = SchemaNode("user", relation={}, permission={})
 folder_entity = SchemaNode(
     "folder",
-    relation={"parent": "folder", "owner": "user", "reader": "user"},
+    relation={"parent": "folder", "owner": "user", "reader": "user", "banned": "user"},
     permission={
-        "read": ["owner", "reader", "parent.read", "parent.edit"],
-        "edit": ["owner", "parent.edit"],
+        "read": {
+            "And": [
+                {"Or": ["owner", "reader", "parent.read", "parent.edit"]},
+                {"Not": ["banned"]},
+            ]
+        },
+        "edit": {"And": [{"Or": ["owner", "parent.edit"]}, {"Not": ["banned"]}]},
     },
 )
 
@@ -30,13 +35,13 @@ for t in tuples:
     runtime.add_tuple(t)
 
 # is a direct match
-print(runtime.check("user", "admin", "read", "folder", "root"))
+# print(runtime.check("user", "admin", "read", "folder", "root"))
 
 # is not a direct match, should use the parent.read route
-print(runtime.check("user", "admin", "read", "folder", "dts"))
+# print(runtime.check("user", "admin", "read", "folder", "dts"))
 
 # is not a direct match, should use the parent.read route
 print(runtime.check("user", "admin", "edit", "folder", "france"))
 
 # is not a direct match, should use the parent.read route
-print(runtime.check("user", "paul", "edit", "folder", "france"))
+# print(runtime.check("user", "paul", "edit", "folder", "france"))
