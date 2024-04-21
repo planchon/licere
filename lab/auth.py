@@ -27,7 +27,9 @@ runtime = Runtime(folder_schema)
 
 tuples = [
     RelationTuple("folder", "root", "owner", "user", "admin"),
+    RelationTuple("folder", "root", "reader", "user", "ppl"),
     RelationTuple("folder", "france", "parent", "folder", "root"),
+    RelationTuple("folder", "france", "banned", "user", "ppl"),
     RelationTuple("folder", "dts", "parent", "folder", "france"),
 ]
 
@@ -44,4 +46,4 @@ for t in tuples:
 print(runtime.check("user", "admin", "edit", "folder", "france"))
 
 # is not a direct match, should use the parent.read route
-# print(runtime.check("user", "paul", "edit", "folder", "france"))
+print(runtime.check("user", "ppl", "read", "folder", "france"))

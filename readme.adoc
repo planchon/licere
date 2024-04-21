@@ -1,14 +1,12 @@
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
-
 = Licere
 
-Tests on Zanzibar authorization model
+Engineering test about the zanzibar authorization model. Goals is to create a rust library and server to use it.
 
-.What licere mean?
-NOTE: Its from the latin "licere" which mean to allow
+Zanzibar is a link:https://research.google/pubs/zanzibar-googles-consistent-global-authorization-system/[paper] published by Google engineers. The goal is to make authorization scale in all dimensions (latency, dev experience, product adoption)
+
+== POC
+=== Python
+
+ * [x] pure python schema definition
+ * [x] `and`, `or` and `not` support in the schema
+ * [x] nested types (with the `.` operator)
