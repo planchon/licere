@@ -1,0 +1,17 @@
+[package]
+name = "engine"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "engine"
+crate-type = ["lib"]
+edition = "2021"
+path = "src/lib.rs"
+
+[dependencies]
+env_logger.workspace = true
+log.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true

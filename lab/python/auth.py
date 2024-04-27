@@ -1,4 +1,4 @@
-from auth_types import SchemaGraph, SchemaNode, RelationTuple, Runtime
+from lab.python.auth_types import SchemaGraph, SchemaNode, RelationTuple, Runtime
 
 folder_schema = SchemaGraph()
 

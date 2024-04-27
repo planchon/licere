@@ -1,0 +1,20 @@
+== Engine
+
+=== Check
+
+Calculating a check is quite simple. You need to follow the graph and make sure that every binary condition is well respected.
+
+Heavy optimisation can be done here by doing parallel work and early terminating a compute request when an exact sucess has been found.
+
+The check engine needs to include an explanation feature, like the explain in SQL but for the authorization, explaining which condition has lead to success or failure
+
+=== Subject listing
+
+(what entities can do the permission on the subject, ie : who can read the folder 2 ?)
+This is not trivial because we need to find every entity that can do the permission on the subject. If the graph is complexe we might need to follow a lot of routes. Again this can be optimize a lot with clever algorithms.
+
+
+=== Entity listing
+
+(what subject the entity can do a permission on, ie: what folder can entity 2 read on ?)
+This again need some complexe graph logic that can be greatly optimize.

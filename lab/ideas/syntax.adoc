@@ -1,0 +1,17 @@
+== Syntax
+
+The model syntax should be precise, easy to read and efficiant to empower all teams around the world create very good authorization schemas.
+
+.Modeling code syntax idea 1
+----
+entity User {}
+
+entity Folder {
+    relation owner: User
+    relation reader: User
+    relation parent: Folder
+    
+    read := owner | parent.read
+    edit := owner | reader | parent.edit
+}
+----

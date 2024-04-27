@@ -17,6 +17,11 @@ class RelationTuple:
         self.subject_id = si
 
 
+class Subject:
+    subject_type: str
+    subject_id: str
+
+
 BinaryPermissionOperator = Literal["Or", "And", "Not"]
 
 type Permission = dict[BinaryPermissionOperator, list[str | Permission]]

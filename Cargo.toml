@@ -1,0 +1,8 @@
+[workspace]
+members = ["crates/server", "crates/engine", "crates/cli"]
+
+[workspace.dependencies]
+log = { version = "*" }
+env_logger = { version = "*" }
+tracing = { version = "*" }
+tracing-subscriber = { version = "*" }
