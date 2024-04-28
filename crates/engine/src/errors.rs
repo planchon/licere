@@ -11,11 +11,14 @@ pub enum SchemaError {
     BadEntityRelationDefinition(String),
     EntityNotExists(String),
     RelationNotExists(String),
+    PermissionNotExists(String),
 }
 
 #[derive(Debug)]
 pub enum EngineError {
     GeneralEngineError,
+    EntityNotFound(String),
+    RelationNotFound(String),
 }
 
 impl fmt::Display for StoreError {
@@ -40,6 +43,9 @@ impl fmt::Display for SchemaError {
             SchemaError::RelationNotExists(ref rel) => {
                 write!(f, "Relation {} does not exists", rel)
             }
+            SchemaError::PermissionNotExists(ref per) => {
+                write!(f, "Permission {} does not exists", per)
+            }
         }
     }
 }
@@ -49,6 +55,12 @@ impl fmt::Display for EngineError {
         match *self {
             EngineError::GeneralEngineError => {
                 write!(f, "General engine error")
+            }
+            EngineError::EntityNotFound(ref ent) => {
+                write!(f, "Entity {} not found error", ent)
+            }
+            EngineError::RelationNotFound(ref rel) => {
+                write!(f, "Relation {} not found error", rel)
             }
         }
     }

@@ -14,6 +14,7 @@ pub fn seeding_store(store: &mut MemoryStore) {
     event!(Level::INFO, "starting the seeding operation");
 
     let _ = store.add(Tuple::new("folder", "root", "admin", "user", "admin"));
+    _ = store.add(Tuple::new("folder", "ppl", "parent", "folder", "root"));
     _ = store.add(Tuple::new("folder", "root", "reader", "user", "paul"));
     _ = store.add(Tuple::new("folder", "ppl", "admin", "user", "paul"));
 }
@@ -46,9 +47,9 @@ pub fn create_schema() -> Schema {
                     PermissionDefinition {
                         name: "read".into(),
                         op: PermissionOperationDefinition::Or(vec![
-                            PermissionOperationDefinition::Entity("reader".into()),
-                            PermissionOperationDefinition::Entity("admin".into()),
-                            PermissionOperationDefinition::EntityWithPermission((
+                            PermissionOperationDefinition::Relation("reader".into()),
+                            PermissionOperationDefinition::Relation("admin".into()),
+                            PermissionOperationDefinition::UndirectRelation((
                                 "parent".into(),
                                 "read".into(),
                             )),
@@ -57,8 +58,8 @@ pub fn create_schema() -> Schema {
                     PermissionDefinition {
                         name: "edit".into(),
                         op: PermissionOperationDefinition::Or(vec![
-                            PermissionOperationDefinition::Entity("admin".into()),
-                            PermissionOperationDefinition::EntityWithPermission((
+                            PermissionOperationDefinition::Relation("admin".into()),
+                            PermissionOperationDefinition::UndirectRelation((
                                 "parent".into(),
                                 "edit".into(),
                             )),
