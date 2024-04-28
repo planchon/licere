@@ -1,5 +1,8 @@
 use cli::seed::operation::{create_schema, seeding_store};
-use engine::store::memory::MemoryStore;
+use engine::{
+    engine::engine::{Engine, SlowEngine},
+    store::{memory::MemoryStore, types::Tuple},
+};
 use tracing::{event, subscriber, Level};
 use tracing_subscriber::FmtSubscriber;
 
@@ -21,9 +24,18 @@ fn main() {
         panic!("Error in the schema : {}", e);
     }
 
-    let mut memory_store = MemoryStore::new(&schema);
-
+    let mut memory_store = MemoryStore::new();
     seeding_store(&mut memory_store);
+
+    let engine = SlowEngine::new(memory_store, schema);
+
+    let res = engine.check(Tuple {
+        entity: "user".into(),
+        entity_id: "paul".into(),
+        relation: "read".into(),
+        subject: "folder".into(),
+        subject_id: "ppl".into(),
+    });
 
     event!(Level::INFO, "Launching the Licere CLI");
 }

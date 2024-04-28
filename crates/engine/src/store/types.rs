@@ -1,4 +1,4 @@
-use crate::errors::SchemaError;
+use crate::errors::{SchemaError, StoreError};
 
 #[derive(Debug, Clone)]
 pub struct Tuple {
@@ -28,5 +28,5 @@ impl Tuple {
 }
 
 pub trait Store {
-    fn add(&mut self, t: Tuple) -> Result<(), SchemaError>;
+    fn add(&mut self, t: Tuple) -> Result<(), StoreError>;
 }

@@ -6,9 +6,16 @@ pub enum StoreError {
     TupleNotFound(String),
 }
 
+#[derive(Debug)]
 pub enum SchemaError {
     BadEntityRelationDefinition(String),
     EntityNotExists(String),
+    RelationNotExists(String),
+}
+
+#[derive(Debug)]
+pub enum EngineError {
+    GeneralEngineError,
 }
 
 impl fmt::Display for StoreError {
@@ -30,8 +37,23 @@ impl fmt::Display for SchemaError {
             SchemaError::EntityNotExists(ref ent) => {
                 write!(f, "Entity {} does not exists", ent)
             }
+            SchemaError::RelationNotExists(ref rel) => {
+                write!(f, "Relation {} does not exists", rel)
+            }
+        }
+    }
+}
+
+impl fmt::Display for EngineError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match *self {
+            EngineError::GeneralEngineError => {
+                write!(f, "General engine error")
+            }
         }
     }
 }
 
 impl error::Error for StoreError {}
+impl error::Error for SchemaError {}
+impl error::Error for EngineError {}
